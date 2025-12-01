@@ -2,80 +2,58 @@
 #include<stdlib.h>
 #define MAX 10
 
-struct stack
-{
-  int top;
-  int *array;
-};
-struct stack *stk;
+int stack[MAX];
+int peek = -1;
 
 void push()
 {
   int data;
-  if(stk->top == MAX-1)
+  if(peek == MAX)
   {
-    printf("Stack Overflow !!!");
+    printf("\n[!] Stack overflow ! No more space aviable to push");
     return;
   }
-  else
-  {
-    stk->top ++;
-    printf("\nEnter data :");
-    scanf("%d",&data);
-    stk->array[stk->top] = data;
-    printf("\n%d Succesfully Pushed.",data);
-  }
+  printf("Enter data:");
+  scanf("%d",&data);
+  peek++;
+  stack[peek] = data;
+  printf("\n[*] %d Successfully pushed at stack",data);
 }
 
 void pop()
 {
   int data;
-  if(stk->top == -1)
+  if(peek == -1)
   {
-    printf("Stack Underflow !!!");
+    printf("\n[!] Stack downflow ! No data aviable to pop.");
     return;
   }
-  else
-  {
-    data = stk->array[stk->top];
-    stk->top--;
-    printf("\n%d Succesfully Deleted.",data);
-  }
+  data = stack[peek];
+  peek--;
+  printf("\n[*] %d Successfully poped from stack.",data);
 }
 
 void display()
 {
   int i;
-  if(stk->top == -1)
+  printf("[");
+  for(i=peek;i>=0;i--)
   {
-    printf("Data not found !");
-    return;
+    printf("%d ",stack[i]);
   }
-  else
-  {
-    printf("\n[");
-    for(i=0;i<=stk->top;i++)
-    {
-      printf("%d ",stk->array[i]);
-    }
-    printf("]");
-  }
+  printf("\b]");
 }
-
 int main()
 {
   int ch;
-  stk = (struct stack *)malloc(sizeof(struct stack));
-  stk->top = -1;
-  stk->array = (int *)calloc(MAX,sizeof(int));
-  
-  printf("\n1. Push");
-  printf("\n2. Pop");
-  printf("\n3. Display");
-  printf("\n4. Exit");
   while(1)
   {
-    printf("\n\nEnter your choice :");
+    printf("\n\n\n");
+    printf("1. Push.\n");
+    printf("2. Pop.\n");
+    printf("3. Display.\n");
+    printf("4. Exit.\n");
+    printf("\n>>Enter a choice:");
     scanf("%d",&ch);
     switch(ch)
     {
@@ -91,7 +69,7 @@ int main()
       case 4:
         exit(0);
       default:
-        printf("\n Wrong input.");
+        printf("!!!!!Invaild input!!!!!");
     }
   }
   return 0;
