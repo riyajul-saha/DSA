@@ -31,14 +31,29 @@ struct node *buildTree(int preorder[])
   return root;
 }
 
+void preorder_traversal(struct node *tree)
+{
+  if(tree == NULL)
+  {
+    return;
+  }
+  printf("%d ",tree->data);
+  preorder_traversal(tree->left);
+  preorder_traversal(tree->right);
+}
+
 int main()
 {
   int preorder[]={1,2,-1,-1,3,4,-1,-1,5,-1,-1};
   struct node *root = buildTree(preorder);
+  printf("Check tree building........................\n");
   printf("root->data= %d\n",root->data);
   printf("root->left->data= %d\n",root->left->data);
   printf("root->right->data= %d\n",root->right->data);
   printf("root->right->left->data= %d\n",root->right->left->data);
   printf("root->right->right->data= %d\n",root->right->right->data);
+  
+  printf("Check preorder tree traversal.................\n");
+  preorder_traversal(root);
   return 0;
 }
