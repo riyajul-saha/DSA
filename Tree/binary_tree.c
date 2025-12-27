@@ -42,6 +42,28 @@ void preorder_traversal(struct node *tree)
   preorder_traversal(tree->right);
 }
 
+void inorder_traversal(struct node *root)
+{
+  if(root == NULL)
+  {
+    return;
+  }
+  inorder_traversal(root->left);
+  printf("%d ",root->data);
+  inorder_traversal(root->right);
+}
+
+void postorder_traversal(struct node *root)
+{
+  if(root == NULL)
+  {
+    return;
+  }
+  postorder_traversal(root->left);
+  postorder_traversal(root->right);
+  printf("%d ",root->data);
+}
+
 int main()
 {
   int preorder[]={1,2,-1,-1,3,4,-1,-1,5,-1,-1};
@@ -53,7 +75,14 @@ int main()
   printf("root->right->left->data= %d\n",root->right->left->data);
   printf("root->right->right->data= %d\n",root->right->right->data);
   
-  printf("Check preorder tree traversal.................\n");
+  printf("\nCheck preorder tree traversal.................\n");
   preorder_traversal(root);
+  
+  printf("\nCheck Inorder tree traversal.................\n");
+  inorder_traversal(root);
+
+  printf("\nCheck Post order tree traversal.................\n");
+  postorder_traversal(root);
+  printf("\n");
   return 0;
 }

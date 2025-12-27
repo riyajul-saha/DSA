@@ -9,12 +9,8 @@ struct node
   struct node *next;
 };
 
-struct node *createnode()
+struct node *createnode(int data)
 {
-  int data;
-  printf("\nEnter data:");
-  scanf("%d",&data);
-  
   struct node *cn;
   cn = (struct node *)malloc(sizeof(struct node));
   cn->data = data;
@@ -30,10 +26,10 @@ int empty()
   return head == NULL;
 }
 
-void enqueue()
+void enqueue(int data)
 {
   struct node *eq;
-  eq = createnode();
+  eq = createnode(data);
   if(empty())
   {
     head = eq;
@@ -44,14 +40,13 @@ void enqueue()
     tail->next = eq;
     tail = eq;
   }
-  printf("\n[~] Succesfully added %d",eq->data);
 }
 
-void dequeue()
+int dequeue()
 {
   if(empty())
   {
-    printf("\n[!] No data found to delete.");
+    return -1;
   }
   else
   {
@@ -62,13 +57,13 @@ void dequeue()
     temp->next = NULL;
     data = temp->data;
     free(temp);
-    printf("\n[~] Succesfully deleted %d",data);
+    return data;
   }
 }
 
-void front()
+int front()
 {
-  printf("Front data is :%d",head->data);
+  return head->data;
 }
 
 void display()
@@ -92,6 +87,7 @@ void display()
 int main()
 {
   int ch;
+  int data;
   while(1)
   {
     printf("\n== QUEUE ==");
@@ -106,13 +102,25 @@ int main()
     switch(ch)
     {
       case 1:
-        enqueue();
+        printf("\nEnter data:");
+        scanf("%d",&data);
+        enqueue(data);
+        printf("\n[~] Succesfully added %d",data);
         break;
       case 2:
-        dequeue();
+        data=dequeue();
+        if(data != -1)
+        {
+          printf("\n[~] Succesfully deleted %d",data);
+        }
+        else
+        {
+          printf("\n[!] Queue is empty");
+        }
         break;
       case 3:
-        front();
+        data=front();
+        printf("Front data is :%d",data);
         break;
       case 4:
         display();
