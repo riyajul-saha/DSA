@@ -113,6 +113,12 @@ void convert_to_postfix(char expression[100])
         }
         else if(preference_of(stack[top]) >= preference_of(ele))
         {
+          if(ele == '^' && stack[top] == '^')
+          {
+            push_in_stack(ele);
+            i++;
+            continue;
+          }
           while(preference_of(stack[top]) >= preference_of(ele)  && stack[top] != '(' && top != -1)
           {
             op = pop_from_stack();
