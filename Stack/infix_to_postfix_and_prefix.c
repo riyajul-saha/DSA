@@ -153,12 +153,31 @@ void convert_to_postfix(char expression[100])
   output[idx] = '\0';
 }
 
+void reverse_string(char str[])
+{
+  char temp;
+  int i;
+  for(i = 0; i<=(strlen(str)-1)/2 ; i++)
+  {
+    temp = str[i];
+    str[i] = str[(strlen(str)-1)-i];
+    str[(strlen(str)-1)-i] = temp;
+  }
+}
+
 int main()
 {
   char expression[100];
   printf("\nEnter Infix expression:");
   scanf("%s",expression);
   convert_to_postfix(expression);
-  printf("\nPostfix format : %s\n",output);
+  printf("\nPostfix format : %s",output);
+  
+  top = -1;
+  idx = 0;
+  reverse_string(expression);
+  convert_to_postfix(expression);
+  reverse_string(output);
+  printf("\nPrefix format :%s\n",output);
   return 0;
 }
